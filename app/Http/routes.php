@@ -11,6 +11,21 @@
 |
 */
 
-Route::get('/', function () {
-    return view('index');
+Route::group(['middlewareGroups' => 'web'], function () {
+    Route::get('/{author?}', [  // ? - опциональный параметр
+        'uses' => 'QuoteController@getIndex',
+        'as' => 'index'
+    ]);
+
+    Route::post('/new', [
+       'uses' => 'QuoteController@postQuote',
+        'as' => 'create'
+    ]);
+
+    Route::get('/delete/{quote_id}', [
+        'uses' => 'QuoteController@getDeleteQuote',
+        'as' => 'delete'
+    ]);
 });
+
+
