@@ -32,17 +32,29 @@
         <h1>Последние заметки</h1>
         @for ($i = 0; $i < count($quotes); $i++)
             <article class="quote{{ $i % 3 === 0 ? ' first-in-line' : (($i + 1) % 3 === 0 ? ' last-in-line' : '') }}">
-                <div class="delete"><a href="{{ route('delete', ['quote_id' => $quotes[$i]->id]) }}">x</a></div>
+                <div class="delete">
+                    <a href="{{ route('delete', ['quote_id' => $quotes[$i]->id]) }}">
+                        <span class="fa fa-times"></span>
+                    </a>
+                </div>
                 {{ $quotes[$i]->quote }}
-                <div class="info">Created by <a href="{{ route('index', ['author' => $quotes[$i]->author->name]) }}">{{ $quotes[$i]->author->name }}</a> on {{ $quotes[$i]->created_at }}</div>
+                <div class="info">
+                    Created by <a href="{{ route('index', ['author' => $quotes[$i]->author->name]) }}">
+                        {{ $quotes[$i]->author->name }}
+                    </a> on {{ $quotes[$i]->created_at }}
+                </div>
             </article>
         @endfor
         <div class="pagination">
             @if ($quotes->currentPage() !== 1)
-                <a href="{{ $quotes->previousPageUrl() }}"><span class="class fa fa-chevron-left"></span></a>
+                <a href="{{ $quotes->previousPageUrl() }}">
+                    <span class="class fa fa-chevron-left"></span>
+                </a>
             @endif
             @if ($quotes->currentPage() !== $quotes->lastPage() && $quotes->hasPages())
-                    <a href="{{ $quotes->nextPageUrl() }}"><span class="class fa fa-chevron-right"></span></a>
+                    <a href="{{ $quotes->nextPageUrl() }}">
+                        <span class="class fa fa-chevron-right"></span>
+                    </a>
             @endif
         </div>
     </section>
